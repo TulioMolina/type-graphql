@@ -59,7 +59,15 @@ class SearchResolver {
   }
 }
 ```
+Notice that we can also use union types to declare the type of object type properties. For instance, having previously defined ```CustomUnionType```, we could use it to explicitly declare the type of ```sampleUnionProperty``` in ```SampleObject``` as follows:
 
+```typescript
+@ObjectType()
+class SampleObject {
+  Field(type => CustomUnionType)
+  sampleUnionProperty: typeof CustomUnionType;
+}
+```
 ## Resolving Type
 
 Be aware that when the query/mutation return type (or field type) is a union, we have to return a specific instance of the object type class. Otherwise, `graphql-js` will not be able to detect the underlying GraphQL type correctly when we use plain JS objects.
